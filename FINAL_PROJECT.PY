@@ -366,6 +366,7 @@ def display():
     glutSwapBuffers()
 
 
+
 # Move tank
 def move_tank(direction):
     global tank_x, tank_y
@@ -378,6 +379,8 @@ def move_tank(direction):
     elif direction == 'right' and tank_x + 20 < 800:
         tank_x += tank_speed
 # Add a function to restart the game
+
+
 def restart_game():
     global tank_x, tank_y, tank_lives, score, active_balls, falling_balls, is_exploding, start_time
     tank_x, tank_y = 400, 300  # Reset tank position
@@ -387,6 +390,7 @@ def restart_game():
     falling_balls = []  # Clear falling balls
     is_exploding = False  # Reset explosion state
     start_time = time.time()  # Reset the start time
+
 
 
 # Keyboard controls
@@ -406,6 +410,7 @@ def keyboard(key, x, y): #tank movement and shoot
     elif key == b'r' or key == b'R':  # Restart the game when 'R' is pressed
         restart_game()
 
+
 # Special keys for rotation
 def special_keys(key, x, y): # Special keys for rotation
     global cannon_angle
@@ -414,6 +419,8 @@ def special_keys(key, x, y): # Special keys for rotation
     elif key == GLUT_KEY_LEFT:
         cannon_angle += 5
     glutPostRedisplay()
+
+
 
 # Shoot ball
 def shoot_ball():
@@ -424,6 +431,8 @@ def shoot_ball():
     dy = sin(rad_angle) * 3  # Set the y velocity component based on the cannon angle
     new_ball = {'x': tank_x, 'y': tank_y, 'dx': dx, 'dy': dy, 'size': 'small'}  # Add size here
     active_balls.append(new_ball)  # Add the new ball to the active balls list
+
+
 
 # Update balls
 # Update tank bullets and detect collisions
@@ -491,7 +500,66 @@ def update_falling_balls():
         ball['x'] += ball['dx']
         ball['y'] += ball['dy']
 
+
+# def render():
+#     #set_blue_background()  # Set the background color to blue
+#     # Your other rendering code goes here (drawing objects, etc.)
+#     if tank_lives <= 0:  # If the tank has no lives left
+#         draw_text("Game Over! You're out of lives.", 300, 300)
+#         draw_text("Press 'R' to restart.", 300, 270)
+#     else:
+#         # Your other rendering code goes here (drawing objects, etc.)
+#         for ball in falling_balls:
+#             draw_ball(ball)  # Draw falling balls
+#         for ball in active_balls:
+#             draw_ball(ball)  # Draw active balls
+#         draw_tank()
+#         if is_exploding:
+#             draw_explosion(tank_x, tank_y, 50)  # Draw explosion effect
+#     glutSwapBuffers()
+
+# Display function
+# def display():
+#     global start_time, game_over_flag
+#     glClear(GL_COLOR_BUFFER_BIT)
+#     #set_blue_background()
+#     elapsed_time = time.time() - start_time
+#     draw_text(f"Score: {score}", 650, 570)
+#     draw_text(f"Lives: {tank_lives}", 650, 550)
+
+#     # Calculate the remaining time (60 seconds - elapsed time)
+#     remaining_time = max(0, 60 - int(elapsed_time))  # Ensure time doesn't go negative
+
+#     # Display the countdown timer in the top-right corner
+#     draw_text(f"Time Left: {remaining_time} sec", 650, 530)  # Modify this position for top-right
+    
+#     if tank_lives <= 0:  # If the tank has no lives left
+#         draw_text("Game Over! You're out of lives.", 300, 300)
+#         draw_text("Press 'R' to restart.", 300, 270)
+#         game_over_flag = True
+#     elif remaining_time == 0 and score<=0:
+#         draw_text("Time's up! Game Over.Your score is: {score}", 300, 300)
+#         draw_text("Press 'R' to restart.", 300,)
+#         game_over_flag = True
+
+#     elif remaining_time == 0 and score>0:
+#         draw_text(f"You Win. Your score is: {score}", 300, 300)
+#         draw_text("Press 'R' to restart.", 300,)
+#         game_over_flag = True
+#     else:
+#         for ball in falling_balls:
+#             draw_ball(ball)  # Draw falling balls
+#         for ball in active_balls:
+#             draw_ball(ball)  # Draw active balls
+#         draw_tank()
+#         if is_exploding:
+#             draw_explosion(tank_x, tank_y, 50)  # Draw explosion effect
+        
+    
+#     glutSwapBuffers()
 # Idle function
+
+
 def idle():
     global is_exploding, explosion_start_time
     global falling_ball_counter
@@ -519,6 +587,7 @@ def init():
     glClearColor(0.0, 0.0, 0.0, 1.0)
     glColor3f(1.0, 1.0, 1.0)
     glOrtho(0, 800, 0, 600, -1, 1)
+
 
 
 # Main function
